@@ -31,7 +31,7 @@
 Download / pull the repo to your desired location.
 
 You will have to create an AWS s3 user specifficaly for Airflow to interact with the s3 bucket.
-The credentials for that user will have to be saved in the [s3 file](https://github.com/Al-khali/ETL/tree/main/airflow-data/creds/s3) found the directory [**/airflow-data/creds**](https://github.com/Al-khali/ETL/airflow-data/creds):
+The credentials for that user will have to be saved in the [s3 file](https://github.com/Al-khali/ETL/tree/main/airflow-data/creds/s3) found the directory [**/airflow-data/creds**](https://github.com/Al-khali/ETL/tree/main/airflow-data/creds):
 
     [airflow-spark1]
     aws_access_key_id = 
