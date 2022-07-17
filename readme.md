@@ -31,22 +31,22 @@
 Download / pull the repo to your desired location.
 
 You will have to create an AWS s3 user specifficaly for Airflow to interact with the s3 bucket.
-The credentials for that user will have to be saved in the [s3 file](https://github.com/Al-khali/ETL/airflow-data/creds/s3) found the directory [**/airflow-data/creds**](https://github.com/Al-khali/ETL/airflow-data/creds):
+The credentials for that user will have to be saved in the [s3 file](https://github.com/Al-khali/ETL/tree/main/airflow-data/creds/s3) found the directory [**/airflow-data/creds**](https://github.com/Al-khali/ETL/airflow-data/creds):
 
     [airflow-spark1]
     aws_access_key_id = 
     aws_secret_access_key = 
 
-On rows 17 and 18 in [**dags/dagRun.py**](https://github.com/Al-khali/ETL/dags/dagRun.py) you have the option to choose what databases system to use, mongoDB (noSQL) or Amazon Redshift (RDBMS), just by commenting/uncommenting one or the other:
+On rows 17 and 18 in [**dags/dagRun.py**](https://github.com/Al-khali/ETL/tree/main/dags/dagRun.py) you have the option to choose what databases system to use, mongoDB (noSQL) or Amazon Redshift (RDBMS), just by commenting/uncommenting one or the other:
 
     # database = 'mongoDB'
     database = 'Redshift'
 
-If you want to use **mongoDB**, you will have to enter the mongoDB connection string (or environment variable or file with the string) in the [**dags/dagRun.py**](https://github.com/Al-khali/ETL/dags/dagRun.py) file, line 22:
+If you want to use **mongoDB**, you will have to enter the mongoDB connection string (or environment variable or file with the string) in the [**dags/dagRun.py**](https://github.com/Al-khali/ETL/tree/main/dags/dagRun.py) file, line 22:
 
     client = pymongo.MongoClient('mongoDB_connection_string')
     
-If you want to use a **Redshift** cluster, you will have to provide your Amazon Redshift database name, host and the rest of the credentials from row 29 to 34 in [**dags/dagRun.py**](https://github.com/Al-khali/ETL/dags/dagRun.py):
+If you want to use a **Redshift** cluster, you will have to provide your Amazon Redshift database name, host and the rest of the credentials from row 29 to 34 in [**dags/dagRun.py**](https://github.com/Al-khali/ETL/tree/main/dags/dagRun.py):
     
     dbname = 'testairflow'
     host = '*******************************.eu-central-1.redshift.amazonaws.com'
@@ -55,7 +55,7 @@ If you want to use a **Redshift** cluster, you will have to provide your Amazon 
     password = '********************'
     awsIAMrole = 'arn:aws:iam::************:role/*******
 
-You will have to change the s3 bucket name and file key (the name of the file saved in the s3 bucket) located at lines 148 and line 150 in [**dags/dagRun.py**](https://github.com/Al-khali/ETL/dags/dagRun.py): 
+You will have to change the s3 bucket name and file key (the name of the file saved in the s3 bucket) located at lines 148 and line 150 in [**dags/dagRun.py**](https://github.com/Al-khali/ETL/tree/main/dags/dagRun.py): 
 
     # name of the file in the AWS s3 bucket
     key = 'countyData.json'
@@ -72,7 +72,7 @@ Start the installation with:
 
     docker-compose up -d
 
-This command will pull and create Docker images and containers for Airflow, according to the instructions in the [docker-compose.yml](https://github.com/Al-khali/ETL/docker-compose.yml) file:
+This command will pull and create Docker images and containers for Airflow, according to the instructions in the [docker-compose.yml](https://github.com/Al-khali/ETL/tree/main/docker-compose.yml) file:
 
 <p align="center"><img src=https://user-images.githubusercontent.com/19210522/114414670-b43ab980-9bb7-11eb-8ea8-061385b14980.gif></p>
 
@@ -93,11 +93,11 @@ You can now access the Airflow web interface by going to http://localhost:8080/.
 
 After signing in, the Airflow home page is the DAGs list page. Here you will see all your DAGs and the Airflow example DAGs, sorted alphabetically. 
 
-Any DAG python script saved in the directory [**dags/**](https://github.com/Al-khali/ETL/dags), will show up on the DAGs page (e.g. the first DAG, `analyze_json_data`, is the one built for this project).
+Any DAG python script saved in the directory [**dags/**](https://github.com/Al-khali/ETL/tree/main/dags), will show up on the DAGs page (e.g. the first DAG, `analyze_json_data`, is the one built for this project).
 
 **Note**: If you update the code in the python DAG script, the airflow DAGs page has to be refreshed
 
-**Note**: If you do not want to see any Airflow example dags, se the `AIRFLOW__CORE__LOAD_EXAMPLES:` flag to `False` in the [docker-compose.yml](https://github.com/Al-khali/ETL/docker-compose.yml) file before starting the installation.
+**Note**: If you do not want to see any Airflow example dags, se the `AIRFLOW__CORE__LOAD_EXAMPLES:` flag to `False` in the [docker-compose.yml](https://github.com/Al-khali/ETL/tree/main/docker-compose.yml) file before starting the installation.
 
 <p align="center"><img src=https://user-images.githubusercontent.com/19210522/114454069-dbf34700-9be2-11eb-8040-f57407adf856.png></p>
 
@@ -124,7 +124,7 @@ Grabs the data saved in the XCom and depending of the value pulled, returns the 
 
 The json contains unnecessary data for this case, so it needs to be parsed to extract only the daily total numbers for each county. 
 
-If there is any new data to be processed (the date extracted in the task `getLastProcessedDate` is older than dates in the data) it is saved in a temp file in the directory [**sparkFiles**](https://github.com/Al-khali/ETL/sparkFiles):
+If there is any new data to be processed (the date extracted in the task `getLastProcessedDate` is older than dates in the data) it is saved in a temp file in the directory [**sparkFiles**](https://github.com/Al-khali/ETL/tree/main/sparkFiles):
 
 <p align="center"><img src=https://user-images.githubusercontent.com/19210522/114530253-725f5100-9c53-11eb-942f-73e07baf281d.png></p>
 
@@ -134,9 +134,9 @@ It also returns the task id `endRun` if there was no new data, or the task ID `p
 
 #### Task `processParsedData`
 
-Executes the PySpark script [**sparkFiles/sparkProcess.py**](https://github.com/Al-khali/ETL/sparkFiles/sparkProcess.py). 
+Executes the PySpark script [**sparkFiles/sparkProcess.py**](https://github.com/Al-khali/ETL/tree/main/sparkFiles/sparkProcess.py). 
 
-The parsed data is processed and the result is saved in another temporary file in the [**sparkFiles**](https://github.com/Al-khali/ETL/sparkFiles) directory:
+The parsed data is processed and the result is saved in another temporary file in the [**sparkFiles**](https://github.com/Al-khali/ETL/tree/main/sparkFiles) directory:
 
 <p align="center"><img src=https://user-images.githubusercontent.com/19210522/114529905-1bf21280-9c53-11eb-86e7-1f3110b155ce.png></p>
 
@@ -161,7 +161,7 @@ Dummy task used as the end of the pipeline
 
 ## Shut Down and Restart Airflow
 
-If you want to make changes to any of the configuration files [docker-compose.yml](https://github.com/Al-khali/ETL/docker-compose.yml), [Dockerfile](https://github.com/Al-khali/ETL/Dockerfile), [requirements.txt](https://github.com/Al-khali/ETL-pipeline/requirements.txt) you will have to shut down the Airflow instance with:
+If you want to make changes to any of the configuration files [docker-compose.yml](https://github.com/Al-khali/ETL/tree/main/docker-compose.yml), [Dockerfile](https://github.com/Al-khali/ETL/tree/main/Dockerfile), [requirements.txt](https://github.com/Al-khali/ETL/tree/main/requirements.txt) you will have to shut down the Airflow instance with:
 
     docker-compose down
     
