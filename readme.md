@@ -1,28 +1,6 @@
 # ETL 
 
-
-Mise en place d'un processus ETL
-
-langage :
-    - python 
-
-
-The pipeline architecture :
-    - data lake 
-        + amazon s3
-    - process 
-        + apache spark
-    - warehouse
-        + amazom redshift
-    - orchestrate 
-        + apache airflow
-
-
 ## Scenario
-
-The Romanian COVID-19 data, provided by https://datelazi.ro/, contains COVID-19 data for each county, including the total COVID numbers from one day to the next. It does not contain the difference in numbers between the days (i.e. for county X in day 1 there were 7 cases, in day 2 there were 37 cases). This data is loaded as a json file in the s3 bucket. 
-
-Find the differences between days for all counties (i.e. for county X there were 30 more cases in day 2 than in day 1). If the difference is smaller than 0 (e.g. because of a data recording error), then the difference for that day should be 0.
 
 ## Base concepts
 
